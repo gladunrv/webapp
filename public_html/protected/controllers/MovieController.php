@@ -3,21 +3,25 @@
 class MovieController extends Controller
 {
   
-	public function actionIndex($id)
+	public function actionIndex($id=false)
 	{
-		$movie=Movie::model()->find(array(
-			'select'=>'*',
-		    'condition'=>'id=:id',
-		    'params'=>array(':id'=>$id),
-		));
+		if( empty($id) ){
+			$this -> actionAdmin();
+		} else {
+			$movie=Movie::model()->find(array(
+				'select'=>'*',
+			    'condition'=>'id=:id',
+			    'params'=>array(':id'=>$id),
+			));
 
-		if( empty($movie) ){
-			$movie = $this->getNewData($id);
-		}	
+			if( empty($movie) ){
+				$movie = $this->getNewData($id);
+			}	
 
-		$this->render('index',array(
-			'data' => $movie
-		));
+			$this->render('index',array(
+				'data' => $movie
+			));
+		}
     }
 
     public function actionSetRate()
