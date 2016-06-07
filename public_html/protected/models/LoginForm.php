@@ -1,28 +1,17 @@
 <?php
 
-/**
- * LoginForm class.
- * LoginForm is the data structure for keeping
- */
 class LoginForm extends CFormModel
 {
 	public $api_key;
 	private $_identity;
 
-	/**
-	 * Declares the validation rules.
-	 */
 	public function rules()
 	{
 		return array(
-			// api_key are required
 			array('api_key', 'required')
 		);
 	}
 
-	/**
-	 * Declares attribute labels.
-	 */
 	public function attributeLabels()
 	{
 		return array(
@@ -30,9 +19,6 @@ class LoginForm extends CFormModel
 		);
 	}
 
-	/**
-	 * This is the 'authenticate' validator as declared in rules().
-	 */
 	public function authenticate($attribute,$params)
 	{
 		if(!$this->hasErrors())
