@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'imageDir' => 'images',
-	'imagesPath' => dirname(__FILE__).DIRECTORY_SEPARATOR . '../../images/',
+	'imageDir' => 'uploads',
+	'imagesPath' => dirname(__FILE__).DIRECTORY_SEPARATOR . '../../uploads/',
 	'tmdbImageSize' => 'w500',
 );
