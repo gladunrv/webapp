@@ -8,11 +8,7 @@ class MovieController extends Controller
 		if( empty($id) ){
 			$this -> actionAdmin();
 		} else {
-			$movie=Movie::model()->find(array(
-				'select'=>'*',
-			    'condition'=>'id=:id',
-			    'params'=>array(':id'=>$id),
-			));
+			$movie=Movie::model()->findByPk($id);
 
 			if( empty($movie) ){
 				$movie = $this->getNewData($id);

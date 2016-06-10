@@ -30,13 +30,6 @@ class Tmdb extends CApplicationComponent
 		}
 	}
 
-	public function authentication($api_key){
-		$params = array('api_key'=>$api_key);
-		$output = Yii::app()->curl->get($this->server . 'authentication/guest_session/new', $params);
-		$resp = CJSON::decode($output, true);
-		return $resp;
-	}
-
 	public function get($method, $params=array(), $check=true){
 		return $this -> api('get', $method, $params, $check);
 	}

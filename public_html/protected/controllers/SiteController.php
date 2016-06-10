@@ -2,9 +2,7 @@
 
 class SiteController extends Controller
 {
-	/**
-	 * Declares class-based actions.
-	 */
+
 	public function actions()
 	{
 		return array(
@@ -61,8 +59,8 @@ class SiteController extends Controller
 			$params = array(
 				'api_key'	=> Yii::app()->user->api_key,
 			 	'page' => $pagination->currentPage + 1,
-			  	'primary_release_date.gte' => '2016-04-15',
-			  	'primary_release_date.lte' => '2016-06-02'
+			  	'primary_release_date.gte' => date("Y-m-d", time() - Yii::app()->params['newMovieInterval'] ),
+			  	'primary_release_date.lte' => date("Y-m-d")
 			);
 			$data = Yii::app()->tmdb->get('discover/movie', $params);
 			$pagination->setItemCount($data['total_results']);
@@ -74,9 +72,6 @@ class SiteController extends Controller
 		}
 	}
 
-	/**
-	 * This is the action to handle external exceptions.
-	 */
 	public function actionError()
 	{
 		if($error=Yii::app()->errorHandler->error)
@@ -88,10 +83,6 @@ class SiteController extends Controller
 		}
 	}
 
-
-	/**
-	 * Displays the login page
-	 */
 	public function actionLogin()
 	{
 		$model=new LoginForm;
@@ -111,13 +102,9 @@ class SiteController extends Controller
 			if($model->validate() && $model->login())
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
-		// display the login form
 		$this->render('login',array('model'=>$model));
 	} 
 
-	/**
-	 * Logs out the current user and redirect to homepage.
-	 */
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
